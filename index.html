@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>exeon-os - Fast, Lightweight Linux OS</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #f0f0f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 60px 0;
+      position: relative;
+    }
+
+    .logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 30px;
+      filter: drop-shadow(0 10px 20px rgba(94, 252, 141, 0.3));
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      font-size: clamp(2.5em, 5vw, 4em);
+      color: #5efc8d;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-shadow: 0 0 20px rgba(94, 252, 141, 0.5);
+    }
+
+    .subtitle {
+      font-size: 1.3em;
+      color: #b0b0b0;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Features Grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(94, 252, 141, 0.2);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: #5efc8d;
+      box-shadow: 0 20px 40px rgba(94, 252, 141, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      color: #5efc8d;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+    }
+
+    /* Main Description */
+    .main-description {
+      text-align: center;
+      margin: 60px 0;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 20px;
+      border: 1px solid rgba(94, 252, 141, 0.1);
+    }
+
+    .main-description p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* CTA Buttons */
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 50px 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #5efc8d, #3bd67b);
+      color: #000;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 1.1em;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(94, 252, 141, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(94, 252, 141, 0.4);
+      background: linear-gradient(45deg, #3bd67b, #5efc8d);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: #5efc8d;
+      border: 2px solid #5efc8d;
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: #5efc8d;
+      color: #000;
+    }
+
+    /* Stats Section */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      color: #5efc8d;
+      font-weight: bold;
+      display: block;
+    }
+
+    .stat-label {
+      color: #b0b0b0;
+      margin-top: 5px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid rgba(94, 252, 141, 0.2);
+      margin-top: 60px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .social-links a {
+      color: #5efc8d;
+      font-size: 1.5em;
+      transition: transform 0.3s ease;
+    }
+
+    .social-links a:hover {
+      transform: scale(1.2);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    /* Particles background effect */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #5efc8d;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: drift 20s infinite linear;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translateY(100vh) translateX(0);
+      }
+      to {
+        transform: translateY(-100px) translateX(100px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles" id="particles"></div>
+  
+  <div class="container">
+    <header class="fade-in">
+      <img src="logo.png" alt="EXEON-OS logo" class="logo">
+      <h1>exeon-os</h1>
+      <p class="subtitle">The future of Linux computing - fast, lightweight, and beautifully designed</p>
+    </header>
+
+    <section class="features fade-in">
+      <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h3>Lightning Fast</h3>
+        <p>Built from scratch with performance in mind. Experience blazing-fast boot times and responsive applications.</p>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">🎨</span>
+        <h3>Modern Interface</h3>
+        <p>A unique, developer-first interface that combines aesthetics with functionality for an unparalleled user experience.</p>
+      </div>
+      
+      <div class="feature-card">
+        <span class="feature-icon">🔧</span>
+        <h3>Customizable</h3>
+        <p>Flexible architecture allows you to tailor the system to your exact needs and preferences.</p>
+      </div>
+    </section>
+
+    <section class="main-description fade-in">
+      <p>
+        exeon-os is a fast, lightweight, and modern Linux-based operating system
+        designed for performance, simplicity, and style. It's not just a skin over Linux –
+        it's a bold step towards the future of personal computing.
+      </p>
+      <p>
+        Built from scratch with custom modules, a unique interface, and a developer-first
+        mindset, exeon-os brings you the speed of Linux with the flexibility of your imagination.
+      </p>
+    </section>
+
+    <section class="stats fade-in">
+      <div class="stat-item">
+        <span class="stat-number">2x</span>
+        <span class="stat-label">Faster Boot Time</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">50%</span>
+        <span class="stat-label">Less Memory Usage</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Open Source</span>
+      </div>
+    </section>
+
+    <div class="cta-buttons fade-in">
+      <a href="https://example.com/download" class="btn">
+        📥 Download exeon-os
+      </a>
+      <a href="donate.html" class="btn secondary">
+        💖 Support the Project
+      </a>
+      <a href="who-i-am.html" class="btn secondary">
+        👤 Meet the Developer
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="#" title="GitHub">⚡</a>
+        <a href="#" title="Discord">💬</a>
+        <a href="#" title="Twitter">🐦</a>
+      </div>
+      <p>&copy; 2025 exeon-os. Built with passion by ymk11</p>
+      <p style="margin-top: 10px; color: #666;">Thank you for supporting free and open-source software!</p>
+    </div>
+  </footer>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Initialize particles when page loads
+    window.addEventListener('load', createParticles);
+
+    // Add fade-in animation to elements as they come into view
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
